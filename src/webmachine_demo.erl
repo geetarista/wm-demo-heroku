@@ -14,9 +14,10 @@ ensure_started(App) ->
 %% @spec start_link() -> {ok,Pid::pid()}
 %% @doc Starts the app for inclusion in a supervisor tree
 start_link() ->
+    ensure_started(inets),
     ensure_started(crypto),
     ensure_started(mochiweb),
-    application:set_env(webmachine, webmachine_logger_module, 
+    application:set_env(webmachine, webmachine_logger_module,
                         webmachine_logger),
     ensure_started(webmachine),
     webmachine_demo_sup:start_link().
@@ -24,9 +25,10 @@ start_link() ->
 %% @spec start() -> ok
 %% @doc Start the webmachine_demo server.
 start() ->
+    ensure_started(inets),
     ensure_started(crypto),
     ensure_started(mochiweb),
-    application:set_env(webmachine, webmachine_logger_module, 
+    application:set_env(webmachine, webmachine_logger_module,
                         webmachine_logger),
     ensure_started(webmachine),
     application:start(webmachine_demo).
@@ -38,4 +40,5 @@ stop() ->
     application:stop(webmachine),
     application:stop(mochiweb),
     application:stop(crypto),
+    application:stop(inets),
     Res.
