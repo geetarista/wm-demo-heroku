@@ -14,7 +14,7 @@ Create a new heroku app and use the Erlang buildpack
 
 ```bash
 heroku create wm-demo-heroku -s cedar
-heroku config:add BUILDPACK_URL=http://github.com/heroku/heroku-buildpack-erlang.git
+heroku config:add BUILDPACK_URL="https://github.com/archaelus/heroku-buildpack-erlang.git"
 ```
 
 Then just push it to Heroku.
